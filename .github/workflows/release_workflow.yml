@@ -18,19 +18,20 @@ jobs:
 
       - name: Build project
         run: |
-          sudo apt install gettext -y
-          ./tools/make_release.sh . ${{ github.ref_name }}
+          cd /home/runner/work/actualtime/
+          rm -rf actualtime/tools actualtime/.git actualtime/.github actualtime/tools actualtime/vendor actualtime/tests actualtime/composer.* actualtime/RoboFile.php
+          tar -zcvf actualtime-${{ github.ref_name }}.tgz actualtime
 
       - name: Upload release
         uses: actions/upload-artifact@v4
         with:
           name: actualtime-${{ github.ref_name }}.tgz
-          path: /tmp/actualtime-${{ github.ref_name }}.tgz
+          path: /home/runner/work/actualtime/actualtime-${{ github.ref_name }}.tgz
 
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
-          files: /tmp/actualtime-${{ github.ref_name }}.tgz
+          files: /home/runner/work/actualtime/actualtime-${{ github.ref_name }}.tgz
           body: "New release is available"
           name: actualtime ${{ github.ref_name }}
           draft: true
