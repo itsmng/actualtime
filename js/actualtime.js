@@ -3,7 +3,7 @@ window.actualTime = new function() {
    this.ajax_url = CFG_GLPI.root_doc + '/plugins/actualtime/ajax/timer.php';
    var timer;
    var popup_div = '';
-// Translations
+   // Translations
    var symb_d = '%dd';
    var symb_day = '%d day';
    var symb_days = '%d days';

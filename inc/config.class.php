@@ -207,8 +207,8 @@ class PluginActualtimeConfig extends CommonDBTM {
       return ($this->fields['autoopenrunning'] ? true : false);
    }
 
-   function autoUpdateDuration(){
-    return $this->fields['autoupdate_duration'];
+   function autoUpdateDuration() {
+      return $this->fields['autoupdate_duration'];
    }
 
    static function install(Migration $migration) {

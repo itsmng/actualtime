@@ -68,17 +68,17 @@ function plugin_actualtime_item_add($item) {
    PluginActualtimeTask::afterAdd($item);
 }
 
-function plugin_actualtime_item_purge(TicketTask $item){
+function plugin_actualtime_item_purge(TicketTask $item) {
    global $DB;
 
    $DB->delete(
-      PluginActualtimeTask::getTable(),[
+      PluginActualtimeTask::getTable(), [
          'tasks_id'=>$item->fields['id']
       ]
    );
 }
 
-function plugin_actualtime_getAddSearchOptionsNew($itemtype){
+function plugin_actualtime_getAddSearchOptionsNew($itemtype) {
    $tab=[];
 
    switch ($itemtype) {
@@ -95,7 +95,7 @@ function plugin_actualtime_getAddSearchOptionsNew($itemtype){
                'id' => 'actualtime',
                'name' => 'ActualTime'
             ];
-            
+
             $tab[]=[
                'id'=>'7003',
                'table'=>PluginActualtimeTask::getTable(),

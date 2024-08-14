@@ -47,7 +47,7 @@ class PluginActualtimeTask extends CommonDBTM{
       return __('ActualTime', 'Actualtime');
    }
 
-   static public function rawSearchOptionsToAdd(){
+   static public function rawSearchOptionsToAdd() {
 
       $tab[] = [
          'id' => 'actualtime',
@@ -150,7 +150,7 @@ class PluginActualtimeTask extends CommonDBTM{
                   }
                   return round($diffpercent, 2)."%";
                   break;
-               
+
                case 'task':
                     $query=[
                        'SELECT'=>[
@@ -167,7 +167,7 @@ class PluginActualtimeTask extends CommonDBTM{
                     }
                     return HTML::timestampToString($task_time);
                break;
-                
+
                default:
                   return HTML::timestampToString($actual_totaltime);
                   break;
@@ -291,7 +291,7 @@ JAVASCRIPT;
                   echo Html::scriptBlock($script);
 
                }
-            }else{
+            } else {
                //echo Html::scriptBlock('');
                $div= "<div id='actualtime_autostart' class='fa-label'><i class='fas fa-stopwatch fa-fw' title='".__('Autostart')."'></i><span class='switch pager_controls'><label for='autostart' title='".__('Autostart')."'><input type='hidden' name='autostart' value='0'><input type='checkbox' id='autostart' name='autostart' value='1'><span class='lever'></span></label></span></div>";
                $script=<<<JAVASCRIPT
@@ -461,9 +461,9 @@ JAVASCRIPT;
          ]
       ];
       $req=$DB->request($query);
-      if($row=$req->next()){
+      if ($row=$req->next()) {
          return $row['tasks_id'];
-      }else{
+      } else {
          return 0;
       }
    }
@@ -644,19 +644,19 @@ JAVASCRIPT;
       global $DB;
       $config = new PluginActualtimeConfig;
       $plugin = new Plugin();
-      if(isset($item->input['autostart']) && $item->input['autostart']) {
-         if($item->getField('state')==1 && $item->getField('users_id_tech')==Session::getLoginUserID() && $item->fields['id']){
+      if (isset($item->input['autostart']) && $item->input['autostart']) {
+         if ($item->getField('state')==1 && $item->getField('users_id_tech')==Session::getLoginUserID() && $item->fields['id']) {
             $task_id=$item->fields['id'];
             if ($plugin->isActivated('tam')) {
-               if(PluginTamLeave::checkLeave(Session::getLoginUserID())){
-                  $result['mensage']=__("Today is marked as absence you can not initialize the timer",'tam');
+               if (PluginTamLeave::checkLeave(Session::getLoginUserID())) {
+                  $result['mensage']=__("Today is marked as absence you can not initialize the timer", 'tam');
                   Session::addMessageAfterRedirect(
-                     __("Today is marked as absence you can not initialize the timer",'tam'),
+                     __("Today is marked as absence you can not initialize the timer", 'tam'),
                      true,
                      WARNING
                   );
                   return;
-               }else{
+               } else {
                   $timer_id=PluginTamTam::checkWorking(Session::getLoginUserID());
                   if ($timer_id==0) {
                      Session::addMessageAfterRedirect(
@@ -709,7 +709,7 @@ JAVASCRIPT;
                   ];
 
                   if ($plugin->isActivated('gappextended')) {
-                     PluginGappextendedPush::sendActualtime(PluginActualtimetask::getTicket(Session::getLoginUserID()),$task_id,$result,Session::getLoginUserID(),true);
+                     PluginGappextendedPush::sendActualtime(PluginActualtimetask::getTicket(Session::getLoginUserID()), $task_id, $result, Session::getLoginUserID(), true);
                   }
 
                }
@@ -720,7 +720,7 @@ JAVASCRIPT;
                $result['type']
             );
          }
-      }else{
+      } else {
          if ($config->autoOpenNew()) {
             if ($item->getField('state')==1 && $item->getField('users_id_tech')==Session::getLoginUserID() && $item->fields['id']) {
                // Empty record means just added task (for postShowItem)
@@ -737,9 +737,9 @@ JAVASCRIPT;
 
    static function preUpdate(TicketTask $item) {
       global $DB,$CFG_GLPI;
-      
+
       $config = new PluginActualtimeConfig;
-      if(array_key_exists('state',$item->input)){
+      if (array_key_exists('state', $item->input)) {
          if ($item->input['state']!=1) {
             if (self::checkTimerActive($item->input['id'])) {
                $actual_begin=self::getActualBegin($item->input['id']);
@@ -759,12 +759,12 @@ JAVASCRIPT;
                if ($config->autoUpdateDuration()) {
                   $item->input['actiontime']=ceil(self::totalEndTime($item->input['id'])/($CFG_GLPI["time_step"]*MINUTE_TIMESTAMP))*($CFG_GLPI["time_step"]*MINUTE_TIMESTAMP);
                }
-            } elseif (self::totalEndTime($item->input['id']) > 0 && $config->autoUpdateDuration()) {
+            } else if (self::totalEndTime($item->input['id']) > 0 && $config->autoUpdateDuration()) {
                $item->input['actiontime']=ceil(self::totalEndTime($item->input['id'])/($CFG_GLPI["time_step"]*MINUTE_TIMESTAMP))*($CFG_GLPI["time_step"]*MINUTE_TIMESTAMP);
             }
          }
       }
-      if (array_key_exists('users_id_tech',$item->input)){
+      if (array_key_exists('users_id_tech', $item->input)) {
          if ($item->input['users_id_tech']!=$item->fields['users_id_tech']) {
             if (self::checkTimerActive($item->input['id'])) {
                $actual_begin=self::getActualBegin($item->input['id']);
@@ -949,7 +949,7 @@ JAVASCRIPT;
       if ($whogroup === "mine") {
          if (isset($_SESSION['glpigroups'])) {
             $whogroup = $_SESSION['glpigroups'];
-         } elseif ($who > 0) {
+         } else if ($who > 0) {
             $whogroup = array_column(Group_User::getUserGroups($who), 'id');
          }
       }
@@ -1038,16 +1038,16 @@ JAVASCRIPT;
             $query = "ALTER TABLE $table MODIFY `users_id` int(11) NOT NULL";
             $DB->query($query) or die($DB->error());
          }
-         $migration->addField($table,'origin_start',"INT(11) NOT NULL");
-         $migration->addField($table,'latitude_start',"varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL");
-         $migration->addField($table,'longitude_start',"varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL");
-         $migration->addField($table,'origin_end',"INT(11) NOT NULL");
-         $migration->addField($table,'latitude_end',"varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL");
-         $migration->addField($table,'longitude_end',"varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL");
-         
-         $migration->changeField($table,'actual_begin','actual_begin','TIMESTAMP NULL DEFAULT NULL');
-         $migration->changeField($table,'actual_end','actual_end','TIMESTAMP NULL DEFAULT NULL');
-         
+         $migration->addField($table, 'origin_start', "INT(11) NOT NULL");
+         $migration->addField($table, 'latitude_start', "varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL");
+         $migration->addField($table, 'longitude_start', "varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL");
+         $migration->addField($table, 'origin_end', "INT(11) NOT NULL");
+         $migration->addField($table, 'latitude_end', "varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL");
+         $migration->addField($table, 'longitude_end', "varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL");
+
+         $migration->changeField($table, 'actual_begin', 'actual_begin', 'TIMESTAMP NULL DEFAULT NULL');
+         $migration->changeField($table, 'actual_end', 'actual_end', 'TIMESTAMP NULL DEFAULT NULL');
+
          $migration->migrationOneTable($table);
       }
    }

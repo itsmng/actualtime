@@ -29,7 +29,9 @@
 */
 
 include ("../../../inc/includes.php");
+
 use Glpi\Event;
+
 header("Content-Type: text/html; charset=UTF-8");
 Html::header_nocache();
 
@@ -38,7 +40,7 @@ Session::checkLoginUser();
 global $CFG_GLPI;
 
 if (isset($_POST["action"])) {
-	$plugin=new Plugin();
+    $plugin=new Plugin();
    $task_id=$_POST["task_id"];
    $config = new PluginActualtimeConfig;
    switch ($_POST["action"]) {
@@ -48,11 +50,11 @@ if (isset($_POST["action"])) {
                'title'   => __('Warning'),
                'class'   => 'warn_msg',
             ];
-            if(PluginTamLeave::checkLeave(Session::getLoginUserID())){
-               $result['mensage']=__("Today is marked as absence you can not initialize the timer",'tam');
+            if (PluginTamLeave::checkLeave(Session::getLoginUserID())) {
+               $result['mensage']=__("Today is marked as absence you can not initialize the timer", 'tam');
                echo json_encode($result);
                break;
-            }else{
+            } else {
                $timer_id=PluginTamTam::checkWorking(Session::getLoginUserID());
                if ($timer_id==0) {
                   $result['mensage']="<a href='".$CFG_GLPI['root_doc']."/front/preference.php?forcetab=PluginTamTam$1'>" .__("Timer has not been initialized", 'tam')."</a>";
@@ -103,7 +105,7 @@ if (isset($_POST["action"])) {
                ];
 
                if ($plugin->isActivated('gappextended')) {
-               	PluginGappextendedPush::sendActualtime(PluginActualtimetask::getTicket(Session::getLoginUserID()),$task_id,$result,Session::getLoginUserID(),true);
+                   PluginGappextendedPush::sendActualtime(PluginActualtimetask::getTicket(Session::getLoginUserID()), $task_id, $result, Session::getLoginUserID(), true);
                }
 
             }
@@ -142,22 +144,22 @@ if (isset($_POST["action"])) {
                   'time'    => abs(PluginActualtimeTask::totalEndTime($task_id)),
                ];
                if ($_POST['action']=='end') {
-               	$task=new TicketTask();
+                   $task=new TicketTask();
                   $task->getFromDB($task_id);
                   $input['id']=$task_id;
                   $input['tickets_id']=$task->fields['tickets_id'];
                   $input['state']=2;
                   if ($config->autoUpdateDuration()) {
-                  	$input['actiontime']=ceil(PluginActualtimeTask::totalEndTime($task_id)/($CFG_GLPI["time_step"]*MINUTE_TIMESTAMP))*($CFG_GLPI["time_step"]*MINUTE_TIMESTAMP);
+                      $input['actiontime']=ceil(PluginActualtimeTask::totalEndTime($task_id)/($CFG_GLPI["time_step"]*MINUTE_TIMESTAMP))*($CFG_GLPI["time_step"]*MINUTE_TIMESTAMP);
                      $result['duration']=ceil(PluginActualtimeTask::totalEndTime($task_id)/($CFG_GLPI["time_step"]*MINUTE_TIMESTAMP))*($CFG_GLPI["time_step"]*MINUTE_TIMESTAMP);
                   }
                   $task->update($input);
-                  Event::log($task->getField(getForeignKeyFieldForItemType($task->getItilObjectItemType())), strtolower($task->getItilObjectItemType()), 4, "tracking",sprintf(__('%s updates a task'), $_SESSION["glpiname"]));
+                  Event::log($task->getField(getForeignKeyFieldForItemType($task->getItilObjectItemType())), strtolower($task->getItilObjectItemType()), 4, "tracking", sprintf(__('%s updates a task'), $_SESSION["glpiname"]));
                }
                if ($plugin->isActivated('gappextended')) {
-               	$task=new TicketTask();
-               	$task->getFromDB($task_id);
-               	PluginGappextendedPush::sendActualtime($task->fields['tickets_id'],$task_id,$result,Session::getLoginUserID(),false);
+                   $task=new TicketTask();
+                   $task->getFromDB($task_id);
+                   PluginGappextendedPush::sendActualtime($task->fields['tickets_id'], $task_id, $result, Session::getLoginUserID(), false);
                }
 
             } else {
@@ -192,21 +194,21 @@ if (isset($_POST["action"])) {
                   'segment' => PluginActualtimeTask::getSegment($task_id),
                   'time'    => abs(PluginActualtimeTask::totalEndTime($task_id)),
                ];
-               
+
                $task=new TicketTask();
                $task->getFromDB($task_id);
                $input['id']=$task_id;
                $input['tickets_id']=$task->fields['tickets_id'];
                $input['state']=2;
                if ($config->autoUpdateDuration()) {
-               	$input['actiontime']=ceil(PluginActualtimeTask::totalEndTime($task_id)/($CFG_GLPI["time_step"]*MINUTE_TIMESTAMP))*($CFG_GLPI["time_step"]*MINUTE_TIMESTAMP);
+                   $input['actiontime']=ceil(PluginActualtimeTask::totalEndTime($task_id)/($CFG_GLPI["time_step"]*MINUTE_TIMESTAMP))*($CFG_GLPI["time_step"]*MINUTE_TIMESTAMP);
                   $result['duration']=ceil(PluginActualtimeTask::totalEndTime($task_id)/($CFG_GLPI["time_step"]*MINUTE_TIMESTAMP))*($CFG_GLPI["time_step"]*MINUTE_TIMESTAMP);
                }
                $task->update($input);
-               Event::log($task->getField(getForeignKeyFieldForItemType($task->getItilObjectItemType())), strtolower($task->getItilObjectItemType()), 4, "tracking",sprintf(__('%s updates a task'), $_SESSION["glpiname"]));
+               Event::log($task->getField(getForeignKeyFieldForItemType($task->getItilObjectItemType())), strtolower($task->getItilObjectItemType()), 4, "tracking", sprintf(__('%s updates a task'), $_SESSION["glpiname"]));
                if ($plugin->isActivated('gappextended')) {
-	               PluginGappextendedPush::sendActualtime($task->fields['tickets_id'],$task_id,$result,Session::getLoginUserID(),false);
-	            }
+                   PluginGappextendedPush::sendActualtime($task->fields['tickets_id'], $task_id, $result, Session::getLoginUserID(), false);
+               }
             }
          }
          echo json_encode($result);
