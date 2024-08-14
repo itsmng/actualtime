@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-17 17:20+0200\n"
+"POT-Creation-Date: 2024-08-14 10:34+0200\n"
 "PO-Revision-Date: 2019-11-20 17:17+0100\n"
 "Last-Translator: Óscar Beiro <oscar@ticgal.com>\n"
 "Language-Team: \n"
@@ -18,153 +18,169 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ajax/timer.php:24 inc/apirest.class.php:383 inc/task.class.php:598
-#: inc/task.class.php:600
+#: ajax/timer.php:54 inc/apirest.class.php:411 inc/task.class.php:652
+#: inc/task.class.php:654
 msgid "Today is marked as absence you can not initialize the timer"
 msgstr ""
 
-#: ajax/timer.php:30 inc/task.class.php:609
+#: ajax/timer.php:60 inc/task.class.php:663
 #, fuzzy
 msgid "Timer has not been initialized"
 msgstr "Die Aufgabe wurde nicht initialisiert"
 
-#: ajax/timer.php:40 inc/apirest.class.php:400 inc/task.class.php:621
+#: ajax/timer.php:70 inc/apirest.class.php:428 inc/task.class.php:675
 msgid "A user is already performing the task"
 msgstr "Ein  anderer Benutzer bearbeitet gerade diese Aufgabe"
 
-#: ajax/timer.php:53 inc/apirest.class.php:404 inc/task.class.php:633
+#: ajax/timer.php:83 inc/apirest.class.php:432 inc/task.class.php:687
 msgid "You are already doing a task"
 msgstr "Du bearbeitest gerade eine andere Aufgabe"
 
-#: ajax/timer.php:70 inc/apirest.class.php:417 inc/task.class.php:649
+#: ajax/timer.php:100 inc/apirest.class.php:445 inc/task.class.php:703
 msgid "Timer started"
 msgstr "Timer gestarted"
 
-#: ajax/timer.php:110 ajax/timer.php:161 inc/apirest.class.php:452
-#: inc/apirest.class.php:504 inc/apirest.class.php:524
+#: ajax/timer.php:140 ajax/timer.php:191 inc/apirest.class.php:480
+#: inc/apirest.class.php:532 inc/apirest.class.php:552
 msgid "Timer completed"
 msgstr "Timer beendet"
 
-#: ajax/timer.php:139 inc/apirest.class.php:459 inc/apirest.class.php:510
+#: ajax/timer.php:169 inc/apirest.class.php:487 inc/apirest.class.php:538
 msgid "Only the user who initiated the task can close it"
 msgstr "Nur der Benutzer, der die Aufgabe erstellt hat, kann diese schließen"
 
-#: ajax/timer.php:153 inc/apirest.class.php:462
+#: ajax/timer.php:183 inc/apirest.class.php:490
 msgid "The task had not been initialized"
 msgstr "Die Aufgabe wurde nicht initialisiert"
 
 #. TRANS: d is a symbol for days in a time (displays: 3d)
-#: ajax/timer.php:201
+#: ajax/timer.php:231
 #, php-format
 msgid "%dd"
 msgstr ""
 
 #. TRANS: h is a symbol for hours in a time (displays: 3h)
-#: ajax/timer.php:205
+#: ajax/timer.php:235
 #, php-format
 msgid "%dh"
 msgstr ""
 
 #. TRANS: min is a symbol for minutes in a time (displays: 3min)
-#: ajax/timer.php:209
+#: ajax/timer.php:239
 #, php-format
 msgid "%dmin"
 msgstr ""
 
 #. TRANS: s is a symbol for seconds in a time (displays: 3s)
-#: ajax/timer.php:213
+#: ajax/timer.php:243
 #, php-format
 msgid "%ds"
 msgstr ""
 
-#: ajax/timer.php:217 inc/task.class.php:145
+#: ajax/timer.php:247 inc/task.class.php:196
 msgid "Pause"
 msgstr "Pause"
 
-#: ajax/timer.php:218 inc/task.class.php:144
+#: ajax/timer.php:248 inc/task.class.php:195
 msgid "Restart"
 msgstr "Neustart"
 
-#: ajax/timer.php:224
+#: ajax/timer.php:254
 msgid "Timer started on"
 msgstr "Timer gestartet am"
 
-#: inc/apirest.class.php:14
+#: inc/apirest.class.php:42
 msgid "ActualTime rest API"
 msgstr "ActualTime rest API"
 
-#: inc/apirest.class.php:387
+#: inc/apirest.class.php:415
 #, fuzzy
 msgid "Timer no initialized"
 msgstr "Die Aufgabe wurde nicht initialisiert"
 
-#: inc/config.class.php:57
+#: inc/config.class.php:85
 msgid "Task timer configuration"
 msgstr "Timer Konfiguration"
 
-#: inc/config.class.php:69
+#: inc/config.class.php:97
 msgid "In Standard interface only (default)"
 msgstr "Nur in der Standard-Ansicht"
 
-#: inc/config.class.php:70
+#: inc/config.class.php:98
 msgid "Both in Standard and Helpdesk interfaces"
 msgstr "In Standard- und Helpdesk-Ansicht"
 
-#: inc/config.class.php:73
+#: inc/config.class.php:101
 msgid "Enable timer on tasks"
 msgstr "Timer in Aufgabe aktivieren"
 
-#: inc/config.class.php:85
+#: inc/config.class.php:113
 msgid "Display pop-up window with current running timer"
 msgstr "Pop-Up mit aktuellen Timer anzeigen"
 
-#: inc/config.class.php:91
+#: inc/config.class.php:119
 msgid "Display actual time in closed task box ('Processing ticket' list)"
 msgstr ""
 "Aktuelle Zeit in geschlossener Taskbox anzeigen (Liste 'Ticket bearbeiten')"
 
-#: inc/config.class.php:97
+#: inc/config.class.php:125
 msgid "Automatically open new created tasks"
 msgstr "Neue Aufgabe automatisch öffnen"
 
-#: inc/config.class.php:103
+#: inc/config.class.php:131
 msgid "Automatically open task with timer running"
 msgstr "Timer beim öffnen der Aufgabe automatisch starten"
 
-#: inc/config.class.php:109
+#: inc/config.class.php:137
 msgid "Automatically update the duration"
 msgstr "Automatische Aktualisierung der Dauer"
 
-#: inc/config.class.php:121
+#: inc/config.class.php:149
 msgid "Actual time"
 msgstr "Actual time"
 
-#: inc/running.class.php:6
+#: inc/dashboard.class.php:41
+msgid "(Top 20 users) Actualtime usage per day"
+msgstr ""
+
+#: inc/dashboard.class.php:49
+msgid "(Low 20 users) Actualtime usage per day"
+msgstr ""
+
+#: inc/dashboard.class.php:57
+msgid "(Top 20 users) % Actualtime usage per day"
+msgstr ""
+
+#: inc/dashboard.class.php:65
+msgid "(Low 20 users) % Actualtime usage per day"
+msgstr ""
+
+#: inc/running.class.php:34
 #, fuzzy
 msgid "Actualtime"
 msgstr "Actual time"
 
-#: inc/running.class.php:24
+#: inc/running.class.php:52
 msgid "Running timers"
 msgstr ""
 
-#: inc/running.class.php:29
+#: inc/running.class.php:57
 msgid "Update every (s)"
 msgstr ""
 
-#: inc/task.class.php:18
+#: inc/task.class.php:47
 msgid "ActualTime"
 msgstr "ActualTime"
 
-#: inc/task.class.php:45 inc/task.class.php:63 inc/task.class.php:466
-#: inc/task.class.php:472 inc/task.class.php:478
+#: inc/task.class.php:79 inc/task.class.php:97 inc/task.class.php:520
+#: inc/task.class.php:526 inc/task.class.php:532
 msgid "Duration Diff"
 msgstr "Zeit-Differenz"
 
-#: inc/task.class.php:224
+#: inc/task.class.php:275
 msgid "Partial actual duration"
 msgstr "Teilweise tatsächliche Dauer"
 
-#: inc/task.class.php:225
+#: inc/task.class.php:276
 msgid "Actual Duration"
 msgstr "Tatsächliche Dauer"
