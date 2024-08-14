@@ -20,7 +20,7 @@ jobs:
         run: |
           sudo apt install gettext -y
           ./tools/generate_locales.sh
-          ./tools/update_translations.sh
+          ./tools/updatetranslations.sh
           ./tools/make_release.sh . ${{ github.ref_name }}
 
       - name: Upload release
