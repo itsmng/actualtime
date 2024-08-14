@@ -19,8 +19,6 @@ jobs:
       - name: Build project
         run: |
           sudo apt install gettext -y
-          ./tools/generate_locales.sh
-          ./tools/updatetranslations.sh
           ./tools/make_release.sh . ${{ github.ref_name }}
 
       - name: Upload release
