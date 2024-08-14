@@ -3,7 +3,7 @@
 # -------------------------------------------------------------------------
 # make_release.sh
 # Based on fusioninventory-for-glpi make_release.sh
-# Copyright (C) 2018-2019 by TICgal 
+# Copyright (C) 2018-2019 by TICgal
 # https://github.com/ticgal/actualtime
 # -------------------------------------------------------------------------
 # LICENSE
@@ -36,13 +36,6 @@ then
     exit
 fi
 
-read -p "Are translations up to date? [Y/n] " -n 1 -r
-echo    # (optional) move to a new line
-if [[ ! $REPLY =~ ^[Yy]$ ]] 
-    then
-    [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1 # handle exits from shell or function but don't exit interactive shell
-fi
-
 INIT_DIR=$1
 RELEASE=$2
 
@@ -54,10 +47,10 @@ then
 fi
 
 # test plugin_cvs_dir
-if [ ! -e $INIT_DIR ] 
+if [ ! -e $INIT_DIR ]
 then
     echo "$1 does not exist"
-    exit 
+    exit
 fi
 
 INIT_PWD=$PWD;
@@ -89,24 +82,16 @@ echo "Delete various scripts and directories"
 rm -rf vendor
 rm -rf RoboFile.php
 rm -rf tools
-rm -rf phpunit
 rm -rf tests
 rm -rf .gitignore
-rm -rf .travis.yml
-rm -rf .coveralls.yml
-rm -rf phpunit.xml.dist
 rm -rf composer.json
 rm -rf composer.lock
 rm -rf .composer.hash
-rm -rf ISSUE_TEMPLATE.md
-rm -rf PULL_REQUEST_TEMPLATE.md
-rm -rf .tx
-rm -rf $PLUGINNAME.xml
-rm -rf screenshots
+rm -rf .github
 
 echo "Creating tarball"
 cd ..
-tar czf "$PLUGINNAME-$RELEASE.tar.tgz" $PLUGINNAME
+tar czf "$PLUGINNAME-$RELEASE.tgz" $PLUGINNAME
 
 cd $INIT_PWD;
 
