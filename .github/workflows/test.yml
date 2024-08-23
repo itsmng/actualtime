@@ -1,0 +1,10 @@
+name: Release workflow
+
+on: [pull_request, push]
+
+jobs:
+  test:
+    uses: "itsmng/itsmng-action/.github/workflows/plugininstall.yml@main"
+    with:
+      plugin-key: "actualtime"
+
