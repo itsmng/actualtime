@@ -196,8 +196,8 @@ class PluginActualtimeTask extends CommonDBTM{
                $text_pause = __('Pause', 'actualtime');
                $html = '';
                $script = <<<JAVASCRIPT
-$(document).ready(function() {
-JAVASCRIPT;
+                  $(document).ready(function() {
+               JAVASCRIPT;
 
                // Only task user
                $timercolor = 'black';
@@ -240,16 +240,14 @@ JAVASCRIPT;
                      }
 
                   }
+                  $value2 = __('End');
+                  $html = <<<HTML
+                    <div">
+                      <input type="button" id="actualtime_button_{$task_id}_1_{$rand}" action="{$action1}" value="{$value1}" class="btn btn-success" {$disabled1} data-track-changes="">
+                      <input type="button" id="actualtime_button_{$task_id}_2_{$rand}" action="{$action2}" value="{$value2}" class="btn btn-danger" {$disabled2} data-track-changes="">
+                    </div>
+                  HTML;
 
-                  $html = "<tr class='tab_bg_2'>";
-                  $html .= "<td colspan='2'></td>";
-                  $html .= "<td colspan='2'>";
-                  // Objects of the same task have the same id beginning
-                  // as they all should be changed on actions in case multiple
-                  // windows of the same task is opened (list of tasks + modal)
-                  $html .= "<div><input type='button' id='actualtime_button_{$task_id}_1_{$rand}' action='$action1' value='$value1' class='x-button x-button-main' style='background-color:$color1;color:white' $disabled1 data-track-changes=''></div>";
-                  $html .= "<div><input type='button' id='actualtime_button_{$task_id}_2_{$rand}' action='$action2' value='".__('End')."' class='x-button x-button-main' style='background-color:$color2;color:white' $disabled2 data-track-changes=''></div>";
-                  $html .= "</td></tr>";
 
                   // Only task user have buttons
                   $script .= <<<JAVASCRIPT
@@ -271,13 +269,23 @@ JAVASCRIPT;
                   || (Session::getCurrentInterface() == "central")
                   || $config->showInHelpdesk()) {
 
-                  $html .= "<tr class='tab_bg_2'>";
-                  $html .= "<td class='center'>" . __("Start date") . "</td><td class='center'>" . __("Partial actual duration", 'actualtime') . "</td>";
-                  $html .= "<td>" . __('Actual Duration', 'actualtime') . " </td><td id='actualtime_timer_{$task_id}_{$rand}' style='color:{$timercolor}'></td>";
-                  $html .= "</tr>";
-                  $html .= "<tr id='actualtime_segment_{$task_id}_{$rand}'>";
-                  $html .= self::getSegment($item->getID());
-                  $html .= "</tr>";
+                  $segment = self::getSegment($item->getID());
+                  $labels = [
+                    'start' => __('Start date'),
+                    'partial' => __('Partial actual duration', "actualtime"),
+                    'actual' => __('Actual Duration', 'actualtime'),
+                  ];
+                  $html .= <<<HTML
+                    <div class="d-flex">
+                      <div class="center">{$labels['start']}</div>
+                      <div class="center">{$labels['partial']}</div>
+                      <div>{$labels['actual']}</div>
+                      <div id="actualtime_timer_{$task_id}_{$rand}" style="color:{$timercolor}"></div>
+                    </div>
+                    <div id="actualtime_segment_{$task_id}_{$rand}">
+                      {$segment}
+                    </div>
+                  HTML;
 
                   echo $html;
 

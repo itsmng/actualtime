@@ -52,15 +52,16 @@ class PluginActualtimeRunning extends CommonGLPI {
        echo "<h1>".__("Running timers", "actualtime")."</h1>";
        echo "</div>";
 
-       echo "<div class='right' style='padding:10px;max-width: 950px;margin: 0px auto 5px auto;'>";
+       echo "<div class='tab_cadre_fixe'>";
 
+       echo "<div class='flex'>";
        echo "<label style='padding:2px'>".__("Update every (s)", "actualtime")." </label>";
        Dropdown::showNumber('interval', ['value'=>5,'min'=>5,'max'=>MINUTE_TIMESTAMP,'step'=>10,'rand'=>$rand]);
        echo "<label style='padding:2px'>".__("Disable")." </label>";
        Dropdown::showYesNo('disable', 0, -1, ['use_checkbox'=>true,'rand'=>$rand]);
        echo "<i id='refresh' class='fa fa-sync pointer' style='margin-left: 10px;font-size: 15px'></i>";
 
-       echo "</div>";
+       echo "</div></div>";
 
        echo "<div id='running'>";
        echo "<div>";
