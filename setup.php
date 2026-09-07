@@ -28,7 +28,7 @@
  ----------------------------------------------------------------------
 */
 
-define ('PLUGIN_ACTUALTIME_VERSION', '1.5.2');
+define ('PLUGIN_ACTUALTIME_VERSION', '2.0);
 
 // Minimal GLPI version, inclusive
 define("PLUGIN_ACTUALTIME_MIN_GLPI", "9.5.0");
@@ -39,7 +39,7 @@ function plugin_version_actualtime() {
    return ['name'       => 'ActualTime',
       'version'        => PLUGIN_ACTUALTIME_VERSION,
       'author'         => '<a href="https://tic.gal">TICgal</a>',
-      'homepage'       => 'https://tic.gal/en/project/actualtime-plugin-glpi/',
+      'homepage'       => 'https://github.com/itsmng/actualtime',
       'license'        => 'AGPLv3+',
       'requirements'   => [
          'glpi'   => [
